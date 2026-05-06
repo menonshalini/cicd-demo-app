@@ -21,4 +21,13 @@ jobs:
         run: npm install
 
       - name: Build Docker image
-        run: docker build -t cicd-demo-app .
+        run: docker build -t shalinim88/cicd-demo-app .
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: docker push shalinim88/cicd-demo-app
